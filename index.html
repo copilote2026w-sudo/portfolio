@@ -1,0 +1,839 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f2ec">
+  <meta name="description" content="Portfólio pessoal de Wesley Guerra. Conheça minha trajetória, projetos e formas de contato.">
+  <title>Wesley Guerra — Portfólio</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f6f2ec;
+      --surface: #fffdfa;
+      --surface-light: #eee7de;
+      --text: #241d18;
+      --muted: #5e5147;
+      --accent: #754321;
+      --accent-hover: #613719;
+      --accent-soft: #f1e2d5;
+      --line: rgba(49, 37, 29, .16);
+      --badge-accent: #e7b58c;
+      --content: 1120px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+
+    a { color: inherit; }
+
+    .wrap {
+      width: min(var(--content), calc(100% - 48px));
+      margin-inline: auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      border-bottom: 1px solid var(--line);
+      background: rgba(246, 242, 236, .94);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      text-decoration: none;
+      font-weight: 750;
+      letter-spacing: -.04em;
+      font-size: 1.1rem;
+    }
+
+    .brand span { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-size: .9rem;
+      text-decoration: none;
+      transition: color .2s ease;
+    }
+
+    .nav-links a:hover, .nav-links a:focus-visible { color: var(--accent); }
+
+    .button {
+      min-height: 46px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 0 18px;
+      border: 1px solid var(--accent);
+      border-radius: 6px;
+      background: var(--accent);
+      color: #fffdfa;
+      font-size: .9rem;
+      font-weight: 750;
+      text-decoration: none;
+      transition: transform .2s ease, background .2s ease;
+    }
+
+    .nav-links a.button,
+    .nav-links a.button:hover,
+    .nav-links a.button:focus-visible { color: #fffdfa; }
+
+    .button:hover { transform: translateY(-2px); background: var(--accent-hover); }
+
+    .button-outline {
+      background: transparent;
+      color: var(--text);
+      border-color: var(--line);
+    }
+
+    .button-outline:hover { background: var(--surface-light); }
+
+    .hero {
+      min-height: 650px;
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      align-items: center;
+      gap: 56px;
+      padding-block: 88px;
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--accent);
+      font-size: .78rem;
+      font-weight: 750;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      width: 24px;
+      height: 1px;
+      background: currentColor;
+      content: "";
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      max-width: 720px;
+      margin: 20px 0;
+      font-size: clamp(3.2rem, 8vw, 6.4rem);
+      line-height: .98;
+      letter-spacing: -.075em;
+    }
+
+    h1 span { color: var(--accent); }
+
+    .hero-copy {
+      max-width: 560px;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+
+    .profile-card {
+      position: relative;
+      min-height: 430px;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background:
+        radial-gradient(ellipse at 52% 42%, rgba(117, 67, 33, .1), transparent 52%),
+        linear-gradient(145deg, #eee5da, #e5d9cb);
+    }
+
+    .badge {
+      position: relative;
+      z-index: 1;
+      width: min(326px, calc(100% - 40px));
+      padding: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(49, 37, 29, .1);
+      border-radius: 16px;
+      background: var(--surface);
+      color: var(--text);
+      box-shadow: 0 20px 48px rgba(49, 37, 29, .16), 0 2px 6px rgba(49, 37, 29, .06);
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+
+    .badge:hover {
+      box-shadow: 0 26px 58px rgba(49, 37, 29, .2), 0 2px 6px rgba(49, 37, 29, .06);
+      transform: translateY(-4px);
+    }
+
+    .badge-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 1px 2px 12px;
+      color: var(--muted);
+      font-size: .64rem;
+      font-weight: 750;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+
+    .badge-mark {
+      display: grid;
+      width: 30px;
+      height: 30px;
+      place-items: center;
+      border-radius: 9px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: .76rem;
+      letter-spacing: -.04em;
+    }
+
+    .badge-photo-frame {
+      position: relative;
+      height: 222px;
+      overflow: hidden;
+      border-radius: 11px;
+      background: #e9ded2;
+    }
+
+    .badge-photo-frame::after {
+      position: absolute;
+      inset: 45% 0 0;
+      background: linear-gradient(transparent, rgba(28, 20, 15, .4));
+      content: "";
+      pointer-events: none;
+    }
+
+    .badge-photo-label {
+      position: absolute;
+      right: 12px;
+      bottom: 11px;
+      z-index: 2;
+      padding: 5px 9px;
+      border: 1px solid rgba(255, 253, 250, .4);
+      border-radius: 100px;
+      background: rgba(31, 23, 18, .58);
+      color: #fffdfa;
+      font-size: .62rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .monogram {
+      width: 100%;
+      height: 100%;
+      display: grid;
+      place-items: center;
+      background: radial-gradient(circle at 50% 35%, rgba(215, 164, 122, .2), transparent 55%);
+      color: var(--badge-accent);
+      font-size: 3.5rem;
+      font-weight: 700;
+      letter-spacing: -.08em;
+    }
+
+    .profile-photo {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 18%;
+    }
+
+    .profile-card:not(.has-photo) .profile-photo { display: none; }
+    .profile-card.has-photo .monogram { display: none; }
+
+    .badge-details {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 15px 3px 4px;
+    }
+
+    .badge-name {
+      margin: 0;
+      font-size: 1.18rem;
+      font-weight: 750;
+      letter-spacing: -.045em;
+      line-height: 1.1;
+    }
+
+    .badge-role {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: .78rem;
+    }
+
+    .badge-initials {
+      display: grid;
+      flex: 0 0 38px;
+      width: 38px;
+      height: 38px;
+      place-items: center;
+      border: 1px solid rgba(117, 67, 33, .24);
+      border-radius: 50%;
+      color: var(--accent);
+      font-size: .72rem;
+      font-weight: 750;
+      letter-spacing: -.04em;
+    }
+
+    .badge-skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      padding: 0 3px 13px;
+    }
+
+    .badge-skills span {
+      padding: 5px 8px;
+      border: 1px solid rgba(117, 67, 33, .14);
+      border-radius: 100px;
+      background: #faf6f0;
+      color: #594334;
+      font-size: .62rem;
+      font-weight: 650;
+    }
+
+    .badge-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin: 0 2px;
+      padding-top: 11px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: .58rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .badge-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #42633d;
+    }
+
+    .badge-status::before {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+      content: "";
+    }
+
+    section { padding-block: 88px; border-top: 1px solid var(--line); }
+
+    #experiencia, #habilidades { background: #efe9e1; }
+
+    .section-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 28px;
+      margin-bottom: 38px;
+    }
+
+    h2 {
+      margin: 12px 0 0;
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      line-height: 1.05;
+      letter-spacing: -.06em;
+    }
+
+    .section-intro { max-width: 420px; margin-bottom: 3px; color: var(--muted); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: clamp(36px, 6vw, 72px);
+    }
+
+    .about-copy { max-width: 68ch; color: var(--muted); font-size: 1.02rem; line-height: 1.85; }
+    .about-copy p { margin-bottom: 1.15em; }
+    .about-copy p:last-child { margin-bottom: 0; }
+
+    .highlights {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-content: start;
+      gap: 14px;
+    }
+
+    .highlight {
+      min-height: 120px;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+      box-shadow: 0 8px 24px rgba(49, 37, 29, .035);
+    }
+
+    .highlight strong { display: block; margin-bottom: 5px; color: var(--accent); font-size: 1.4rem; }
+    .highlight span { color: var(--muted); font-size: .86rem; }
+
+    .experience-list {
+      display: grid;
+      gap: 16px;
+    }
+
+    .experience-item {
+      padding: 26px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+      box-shadow: 0 8px 24px rgba(49, 37, 29, .035);
+    }
+
+    .experience-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 24px;
+      margin-bottom: 18px;
+    }
+
+    .experience-header h3 {
+      margin: 0 0 5px;
+      font-size: 1.25rem;
+      letter-spacing: -.03em;
+    }
+
+    .experience-company { color: var(--accent); font-size: .92rem; font-weight: 700; }
+    .experience-period { color: var(--muted); font-size: .88rem; text-align: right; white-space: nowrap; }
+    .experience-item ul { display: grid; gap: 10px; margin: 0; padding-left: 20px; color: var(--muted); font-size: .94rem; }
+    .experience-item li::marker { color: var(--accent); }
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .project {
+      min-height: 270px;
+      display: flex;
+      flex-direction: column;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+      transition: border-color .2s ease, transform .2s ease;
+    }
+
+    .project:hover { transform: translateY(-4px); border-color: rgba(117, 67, 33, .5); }
+
+    .project-number { margin-bottom: 26px; color: var(--accent); font-size: .8rem; letter-spacing: .1em; }
+    .project h3 { margin-bottom: 10px; font-size: 1.2rem; letter-spacing: -.03em; }
+    .project p { margin-bottom: 20px; color: var(--muted); font-size: .92rem; }
+    .project a { margin-top: auto; color: var(--accent); font-size: .88rem; font-weight: 700; text-decoration: none; }
+
+    .skills-list { display: flex; flex-wrap: wrap; gap: 10px; }
+
+    .skill {
+      padding: 10px 15px;
+      border: 1px solid var(--line);
+      border-radius: 100px;
+      background: var(--surface);
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .contact-panel {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+      padding: 38px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: linear-gradient(120deg, #fffdfa, #eee3d7);
+    }
+
+    .contact-panel p { margin: 12px 0 0; color: var(--muted); }
+
+    .social-links {
+      position: fixed;
+      top: 50%;
+      right: 0;
+      z-index: 6;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 14px 12px;
+      border: 1px solid var(--line);
+      border-right: 0;
+      border-radius: 10px 0 0 10px;
+      background: rgba(255, 253, 250, .97);
+      box-shadow: 0 12px 36px rgba(49, 37, 29, .14);
+      transform: translateY(-50%);
+    }
+
+    .social-links a {
+      min-width: 112px;
+      padding: 9px 12px;
+      border: 1px solid transparent;
+      border-radius: 6px;
+      color: var(--text);
+      font-size: .84rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: color .2s ease, border-color .2s ease;
+    }
+
+    .social-links a:hover { color: var(--accent); border-color: rgba(117, 67, 33, .35); background: var(--surface-light); }
+
+    footer {
+      padding-block: 26px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: .82rem;
+    }
+
+    .footer-content { display: flex; justify-content: space-between; gap: 20px; }
+
+    :focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
+
+    @media (min-width: 761px) and (max-width: 1100px) {
+      .social-links {
+        top: auto;
+        right: 50%;
+        bottom: 12px;
+        flex-direction: row;
+        gap: 2px;
+        padding: 7px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        transform: translateX(50%);
+      }
+
+      .social-links a { min-width: 0; padding: 9px 10px; font-size: .78rem; }
+    }
+
+    @media (max-width: 760px) {
+      .wrap { width: min(100% - 36px, var(--content)); }
+      .nav { min-height: 68px; }
+      .nav-links { gap: 16px; }
+      .nav-links a:not(.button) { display: none; }
+      .nav-links .button { min-height: 40px; padding-inline: 12px; font-size: .82rem; }
+      .hero { min-height: auto; grid-template-columns: 1fr; gap: 38px; padding-block: 74px; }
+      .profile-card { min-height: 410px; }
+      section { padding-block: 68px; }
+      .section-heading, .contact-panel { align-items: flex-start; flex-direction: column; }
+      .about-grid { grid-template-columns: 1fr; gap: 28px; }
+      .experience-header { flex-direction: column; gap: 6px; }
+      .experience-period { text-align: left; white-space: normal; }
+      .experience-item { padding: 22px; }
+      .projects { grid-template-columns: 1fr; }
+      .project { min-height: 230px; }
+      .social-links {
+        position: static;
+        width: fit-content;
+        max-width: calc(100% - 24px);
+        margin: 0 auto 18px;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 2px;
+        padding: 7px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        box-shadow: 0 8px 24px rgba(49, 37, 29, .1);
+        transform: none;
+      }
+      .social-links a { min-width: 0; padding: 9px 10px; font-size: .78rem; }
+    }
+
+    @media (max-width: 430px) {
+      .highlights { grid-template-columns: 1fr 1fr; gap: 9px; }
+      .highlight { min-height: 108px; padding: 14px; }
+      .contact-panel { padding: 26px; }
+      .footer-content { flex-direction: column; gap: 6px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <nav class="nav wrap" aria-label="Navegação principal">
+      <a class="brand" href="#inicio">Wesley Guerra<span>.</span></a>
+      <div class="nav-links">
+        <a href="#sobre">Sobre</a>
+        <a href="#experiencia">Experiência</a>
+        <a href="#projetos">Projetos</a>
+        <a class="button" href="./curriculo.pdf" download aria-label="Baixar meu currículo em PDF">
+          Baixar currículo <span aria-hidden="true">↓</span>
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="hero wrap" id="inicio">
+      <div>
+        <div class="eyebrow">Desenvolvimento de software · Bahia, Brasil</div>
+        <h1>Wesley<br><span>Guerra.</span></h1>
+        <p class="hero-copy">Há mais de 10 anos transformo desafios de negócio em soluções digitais. Trabalho de ponta a ponta — da arquitetura ao código — conectando engenharia, produto e experiência do usuário.</p>
+        <div class="hero-actions">
+          <a class="button" href="#projetos">Veja alguns projetos <span aria-hidden="true">↗</span></a>
+          <a class="button button-outline" href="https://wa.me/5571992538054" target="_blank" rel="noreferrer">Vamos conversar</a>
+        </div>
+      </div>
+      <div class="profile-card" id="profile-card" aria-label="Foto de perfil de Wesley Guerra">
+        <article class="badge" aria-label="Crachá profissional de Wesley Guerra">
+          <div class="badge-top">
+            <span>Perfil profissional</span>
+            <span class="badge-mark" aria-hidden="true">WG.</span>
+          </div>
+          <div class="badge-photo-frame">
+            <div class="monogram" aria-hidden="true">WG</div>
+            <img class="profile-photo" id="profile-photo" src="./foto-perfil.png" alt="Retrato de Wesley Guerra">
+            <span class="badge-photo-label">Tecnologia · Bahia</span>
+          </div>
+          <div class="badge-details">
+            <div>
+              <h2 class="badge-name">Wesley Guerra</h2>
+              <p class="badge-role">Desenvolvedor de Software · Full-Stack</p>
+            </div>
+            <span class="badge-initials" aria-hidden="true">WG</span>
+          </div>
+          <div class="badge-skills" aria-label="Áreas de atuação">
+            <span>Arquitetura</span>
+            <span>UX + Produto</span>
+            <span>Testes E2E</span>
+          </div>
+          <div class="badge-footer">
+            <span class="badge-status">Engenharia com visão de produto</span>
+            <span>10+ anos</span>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <section id="sobre">
+      <div class="wrap">
+        <div class="section-heading">
+          <div>
+            <div class="eyebrow">Como eu trabalho</div>
+            <h2>Visão ampla.<br>Entrega consistente.</h2>
+          </div>
+          <p class="section-intro">Gosto de entender o problema antes de escolher a tecnologia — e de acompanhar a solução até chegar a quem realmente vai usá-la.</p>
+        </div>
+        <div class="about-grid">
+          <div class="about-copy">
+            <p>Atuo em diferentes etapas do desenvolvimento: front-end, back-end e bancos de dados. No dia a dia, isso inclui definir arquiteturas, modelar dados, integrar APIs e criar componentes reutilizáveis, sempre atento à performance, à qualidade do código e à manutenção das aplicações.</p>
+            <p>Também automatizo testes End-to-End com Cypress e Selenium. Validar jornadas completas ajuda a encontrar problemas antes que cheguem às pessoas e dá mais confiança para evoluir o produto.</p>
+            <p>Acredito que boas soluções nascem da colaboração. Por isso, participo da análise de regras de negócio e da definição de funcionalidades junto a times de produto e design, considerando usabilidade, prioridades e objetivos do projeto. Também acompanho o fluxo de trabalho em boards e metodologias ágeis.</p>
+            <p>Minha experiência inclui React, Next.js, TypeScript, Node.js, Java e Spring Boot, além de sistemas geoespaciais (SIG), mapas interativos e plataformas usadas por órgãos do Governo da Bahia.</p>
+            <p>Tenho explorado Inteligência Artificial Generativa, Engenharia de Prompts e automação de processos para tornar o desenvolvimento mais eficiente e ampliar as possibilidades das soluções que construo.</p>
+          </div>
+          <div class="highlights" aria-label="Destaques profissionais">
+            <div class="highlight"><strong>10+</strong><span>anos em tecnologia</span></div>
+            <div class="highlight"><strong>E2E</strong><span>testes com Cypress e Selenium</span></div>
+            <div class="highlight"><strong>UX + Produto</strong><span>experiência, negócio e colaboração</span></div>
+            <div class="highlight"><strong>SIG</strong><span>soluções para o Governo da Bahia</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="experiencia">
+      <div class="wrap">
+        <div class="section-heading">
+          <div>
+            <div class="eyebrow">Onde contribuí</div>
+            <h2>Experiência<br>profissional.</h2>
+          </div>
+          <p class="section-intro">Projetos e equipes em que contribuí com desenvolvimento, decisões técnicas e evolução de produtos digitais.</p>
+        </div>
+        <div class="experience-list">
+          <article class="experience-item">
+            <div class="experience-header">
+              <div>
+                <h3>Desenvolvedor de Software</h3>
+                <div class="experience-company">Netra Tecnologia · Tempo integral · Remoto</div>
+              </div>
+              <div class="experience-period">Setembro de 2022 – Atual · Bahia, Brasil</div>
+            </div>
+            <ul>
+              <li>Contribuo para a evolução do SIGWeb GeoBahia, plataforma que reúne ferramentas e dados geográficos do estado, desenvolvendo melhorias e novas funcionalidades.</li>
+              <li>Desenvolvo o GeoDados com Node.js, EJS, Sequelize e arquitetura MVC, apoiando a importação, visualização, análise e manipulação de dados geoespaciais.</li>
+              <li>Implemento mapas interativos e recursos de geoprocessamento com Leaflet, React, QGIS e GeoServer.</li>
+              <li>Construo dashboards e painéis analíticos com React, Vite, Ant Design e Recharts.</li>
+              <li>Estruturo temas, componentes reutilizáveis e padrões de código para manter as interfaces consistentes e facilitar a evolução das aplicações.</li>
+              <li>Uso ferramentas de Inteligência Artificial como apoio ao desenvolvimento, mantendo atenção à qualidade e à adequação das implementações.</li>
+              <li>Participo da compreensão dos requisitos e das regras de negócio, propondo soluções e implementando funcionalidades alinhadas às necessidades dos clientes.</li>
+            </ul>
+          </article>
+
+          <article class="experience-item">
+            <div class="experience-header">
+              <div>
+                <h3>Desenvolvedor de Software Sênior</h3>
+                <div class="experience-company">Vetta · Tempo integral · Remoto</div>
+              </div>
+              <div class="experience-period">Janeiro de 2022 – Setembro de 2024 · Brasil</div>
+            </div>
+            <ul>
+              <li>Atuei na otimização de aplicações para reduzir o tempo de carregamento e tornar as interfaces mais responsivas.</li>
+              <li>Criei e padronizei componentes reutilizáveis com Ant Design.</li>
+              <li>Desenvolvi funcionalidades de back-end com Java e Spring Boot e integrei serviços por meio de APIs REST.</li>
+              <li>Colaborei em decisões técnicas e arquiteturais para a evolução das soluções.</li>
+            </ul>
+          </article>
+
+          <article class="experience-item">
+            <div class="experience-header">
+              <div>
+                <h3>Software Developer Pleno</h3>
+                <div class="experience-company">Compasso UOL · Tempo integral · Salvador, Bahia</div>
+              </div>
+              <div class="experience-period">Outubro de 2021 – Setembro de 2024</div>
+            </div>
+            <ul>
+              <li>Contribuí para a arquitetura de uma plataforma EAD, acompanhando o trabalho desde a concepção técnica até a entrega.</li>
+              <li>Participei da adoção de uma arquitetura baseada em microsserviços no front-end.</li>
+              <li>Desenvolvi interfaces com React, Vite, Material UI e Ant Design, integradas a APIs RESTful.</li>
+              <li>Implementei funcionalidades com Node.js e trabalhei em monitoramento, logs e melhorias de performance.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="projetos">
+      <div class="wrap">
+        <div class="section-heading">
+          <div>
+            <div class="eyebrow">Na prática</div>
+            <h2>Projetos em destaque.</h2>
+          </div>
+          <p class="section-intro">Um recorte de plataformas em que trabalhei com desenvolvimento e evolução de soluções para desafios reais.</p>
+        </div>
+        <div class="projects">
+          <article class="project">
+            <span class="project-number">01 / INEMA</span>
+            <h3>Painel de Monitoramento Ambiental</h3>
+            <p>Colaborei desde as etapas iniciais na arquitetura da aplicação, na organização de bibliotecas e na criação de componentes reutilizáveis. O trabalho ajudou a manter uma interface consistente e preparada para evoluções.</p>
+            <a href="https://paineldemonitoramento.inema.ba.gov.br/aep" target="_blank" rel="noreferrer">Conhecer o AEP ↗</a>
+            <a href="https://paineldemonitoramento.inema.ba.gov.br/asv" target="_blank" rel="noreferrer">Conhecer o ASV ↗</a>
+          </article>
+          <article class="project">
+            <span class="project-number">02 / GEOBAHIA</span>
+            <h3>GeoBahia — Ferramentas de Análise Geoespacial</h3>
+            <p>Participo da evolução de ferramentas de análise geoespacial, trabalhando em funcionalidades, interfaces e recursos para visualizar e analisar dados geográficos.</p>
+            <a href="http://mapa-dev.geobahia.ba.gov.br/" target="_blank" rel="noreferrer">Explorar o GeoBahia ↗</a>
+          </article>
+          <article class="project">
+            <span class="project-number">03 / SOLUÇÕES INTERNAS</span>
+            <h3>Ferramentas e produtos digitais</h3>
+            <p>Também desenvolvi sistemas, módulos e ferramentas internas, atuando em arquitetura, desenvolvimento Full-Stack, dashboards, integração de APIs e testes de aplicações.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="habilidades">
+      <div class="wrap">
+        <div class="section-heading">
+          <div>
+            <div class="eyebrow">Ferramentas e práticas</div>
+            <h2>Como tiro ideias do papel.</h2>
+          </div>
+          <p class="section-intro">Tecnologias que uso e áreas em que atuo para transformar necessidades em software útil e confiável.</p>
+        </div>
+        <div class="skills-list">
+          <span class="skill">React</span>
+          <span class="skill">Next.js</span>
+          <span class="skill">TypeScript</span>
+          <span class="skill">Node.js</span>
+          <span class="skill">Java</span>
+          <span class="skill">Spring Boot</span>
+          <span class="skill">Arquitetura de software</span>
+          <span class="skill">Bancos de dados</span>
+          <span class="skill">APIs</span>
+          <span class="skill">Cypress</span>
+          <span class="skill">Selenium</span>
+          <span class="skill">UX e experiência do usuário</span>
+          <span class="skill">Metodologias ágeis</span>
+          <span class="skill">Sistemas geoespaciais (SIG)</span>
+          <span class="skill">Inteligência Artificial Generativa</span>
+          <span class="skill">Engenharia de prompts</span>
+          <span class="skill">Automação de processos</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="contato">
+      <div class="wrap">
+        <div class="contact-panel">
+          <div>
+            <div class="eyebrow">Uma boa conversa começa por aqui</div>
+            <h2>Tem um desafio<br>em tecnologia?</h2>
+            <p>Seja uma oportunidade, uma ideia ou um projeto: me conte o que você está construindo. Vou gostar de conhecer.</p>
+          </div>
+          <a class="button" href="mailto:contato.wesleygm@gmail.com">contato.wesleygm@gmail.com <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <nav class="social-links" aria-label="Redes sociais">
+    <a href="https://www.instagram.com/wguerra22/" target="_blank" rel="noreferrer">Instagram ↗</a>
+    <a href="https://www.linkedin.com/in/wesleyguerra09/" target="_blank" rel="noreferrer">LinkedIn ↗</a>
+    <a href="https://github.com/Wesleygmssa" target="_blank" rel="noreferrer">GitHub ↗</a>
+    <a href="https://wa.me/5571992538054" target="_blank" rel="noreferrer">WhatsApp ↗</a>
+  </nav>
+
+  <footer>
+    <div class="wrap footer-content">
+      <span>© <span id="year">2026</span> Wesley Guerra. Feito com cuidado.</span>
+      <a href="#inicio">Voltar ao topo ↑</a>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const profilePhoto = document.getElementById("profile-photo");
+    const showProfilePhoto = () => document.getElementById("profile-card").classList.add("has-photo");
+    profilePhoto.addEventListener("load", showProfilePhoto);
+    if (profilePhoto.complete && profilePhoto.naturalWidth > 0) showProfilePhoto();
+  </script>
+</body>
+</html>
